@@ -1,0 +1,4 @@
+# Ignore the bin, build and lib folders
+/bin
+/build
+/lib
