@@ -62,6 +62,20 @@ add_executable(RandomPolygonsCorrectnessTest ${RANDOM_POLYGONS_CORRECTNESS_TEST_
 target_link_libraries(RandomPolygonsCorrectnessTest util)
 
 
+# RegularPolygonsCorrectnessTest
+
+set(REGULAR_POLYGONS_CORRECTNESS_TEST_SRC
+    src/LinearMinAreaEnclosingTriangleFinder.cpp
+    src/MinAreaEnclosingTriangleFinder.cpp
+    
+    test/RegularPolygonsCorrectnessTest.cpp
+)
+
+add_executable(RegularPolygonsCorrectnessTest ${REGULAR_POLYGONS_CORRECTNESS_TEST_SRC})
+
+target_link_libraries(RegularPolygonsCorrectnessTest util)
+
+
 # MinEnclosingTriangleFinderSample
 
 set(MIN_AREA_ENCLOSING_TRIANGLE_FINDER_SAMPLE_SRC
