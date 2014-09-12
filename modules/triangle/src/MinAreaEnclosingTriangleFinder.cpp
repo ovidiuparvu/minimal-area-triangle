@@ -68,7 +68,7 @@ double MinAreaEnclosingTriangleFinder::findMinEnclosingTriangle(const std::vecto
 }
 
 double MinAreaEnclosingTriangleFinder::returnMinEnclosingTriangle(const std::vector<cv::Point2f> &polygon,
-                                                              std::vector<cv::Point2f> &minEnclosingTriangle) {
+                                                                  std::vector<cv::Point2f> &minEnclosingTriangle) {
     int nrOfPolygonPoints = polygon.size();
 
     for (int i = 0; i < 3; i++) {

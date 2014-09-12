@@ -140,5 +140,5 @@ int main(int argc, char** argv) {
         return EXEC_ERR_CODE;
     }
 
-    return runRandomPolygonsCorrectnessTest(argv[1]);
+    return runRandomPolygonsCorrectnessTest(std::string(argv[1]));
 }
