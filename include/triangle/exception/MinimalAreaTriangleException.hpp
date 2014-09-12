@@ -33,7 +33,7 @@ namespace triangle {
                                                   const char *msg)
                 : std::runtime_error(msg) {}
 
-            //! Returns an explanatory string
+            //! Returns an explanatory std::string
             const char* what() const noexcept override {
                 return explanatoryString.c_str();
             }
@@ -45,7 +45,7 @@ namespace triangle {
 
         protected:
 
-            //! Construct the explanatory string
+            //! Construct the explanatory std::string
             /*!
              * \param file  File where the error occurred
              * \param line  Line number where the error occurred

@@ -6,8 +6,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 
 namespace triangle {
 
@@ -21,10 +19,10 @@ namespace triangle {
              *
              * \param ex Exception
              */
-            static void printErrorMessage(const exception &ex) {
-                cerr << endl << ERR_MSG << endl
-                     << endl << ex.what()
-                     << endl << endl;
+            static void printErrorMessage(const std::exception &ex) {
+                std::cerr << std::endl << ERR_MSG << std::endl
+                          << std::endl << ex.what()
+                          << std::endl << std::endl;
             }
 
     };

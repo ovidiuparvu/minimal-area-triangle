@@ -5,8 +5,6 @@
 
 #include <string>
 
-using namespace std;
-
 
 namespace triangle {
 
@@ -17,11 +15,11 @@ namespace triangle {
 
             NumericException() {}
 
-            explicit NumericException(const string &file, int line, const string &msg) {
-                constructExplanatoryString<const string &>(file, line, msg);
+            explicit NumericException(const std::string &file, int line, const std::string &msg) {
+                constructExplanatoryString<const std::string &>(file, line, msg);
             }
 
-            explicit NumericException(const string &file, int line, const char *msg) {
+            explicit NumericException(const std::string &file, int line, const char *msg) {
                 constructExplanatoryString<const char *>(file, line, msg);
             }
 
