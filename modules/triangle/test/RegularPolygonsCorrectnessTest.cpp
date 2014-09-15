@@ -16,6 +16,11 @@ using namespace triangle::util;
 const std::string ERR_DIFFERENT_TRIANGLE_AREA_BEGIN = "The area of the enclosing and expected triangles differs considering the regular polygon defined by ";
 const std::string ERR_DIFFERENT_TRIANGLE_AREA_END   = " points.";
 
+const std::string MSG_RUN_TEST_BEGIN = "Running the correctness test for the regular ";
+const std::string MSG_RUN_TEST_END   = "-gon...";
+
+const std::string MSG_TESTS_EXECUTION_SUCCESSFUL = "[ SUCCESS ] All tests executed successfully.";
+
 const double POLYGON_SIDE_LENGTH = 1000;
 
 const double POLYGON_ORIGIN_X = 2000;
@@ -97,14 +102,14 @@ void runRegularPolygonCorrectnessTest(unsigned int nrOfPoints) {
 void runRegularPolygonsCorrectnessTest() {
     for (unsigned int i = 3; i <= NR_POLYGON_POINTS; i += 3) {
         // Inform the user which k-gon is tested next
-        std::cout << "Running the correctness test for the regular " << i << "-gon..." << std::endl;
+        std::cout << MSG_RUN_TEST_BEGIN << i << MSG_RUN_TEST_END << std::endl;
 
         // Run the correctness test
         runRegularPolygonCorrectnessTest(i);
     }
 
     // Inform the user that all tests were executed successfully
-    std::cout << "[ SUCCESS ] All tests executed successfully." << std::endl;
+    std::cout << std::endl << MSG_TESTS_EXECUTION_SUCCESSFUL << std::endl;
 }
 
 // Main function
