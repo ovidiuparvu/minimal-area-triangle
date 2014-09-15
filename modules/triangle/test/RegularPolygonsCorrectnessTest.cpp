@@ -102,6 +102,9 @@ void runRegularPolygonsCorrectnessTest() {
         // Run the correctness test
         runRegularPolygonCorrectnessTest(i);
     }
+
+    // Inform the user that all tests were executed successfully
+    std::cout << "[ SUCCESS ] All tests executed successfully." << std::endl;
 }
 
 // Main function

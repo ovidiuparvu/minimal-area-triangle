@@ -147,6 +147,9 @@ void runRegularPolygonsAffineTransformationCorrectnessTest() {
         // Run the correctness test
         runRegularPolygonAffineTransformationCorrectnessTest(i);
     }
+
+    // Inform the user that all tests were executed successfully
+    std::cout << "[ SUCCESS ] All tests executed successfully." << std::endl;
 }
 
 // Main function
