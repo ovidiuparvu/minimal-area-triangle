@@ -79,7 +79,7 @@ double computeEnclosingTriangleArea(unsigned int nrOfPoints) {
 }
 
 // Run the regular polygons correctness test considering a polygon with the given number of points
-void runRegularPolygonAffineTransformationCorrectnessTest(unsigned int nrOfPoints) {
+void runRegularPolygonCorrectnessTest(unsigned int nrOfPoints) {
     double enclosingTriangleArea = computeEnclosingTriangleArea(nrOfPoints);
     double expectedTriangleArea  = computeExpectedTriangleArea(nrOfPoints);
 
@@ -94,20 +94,20 @@ void runRegularPolygonAffineTransformationCorrectnessTest(unsigned int nrOfPoint
 }
 
 // Run the regular polygons correctness test
-void runRegularPolygonsAffineTransformationCorrectnessTest() {
+void runRegularPolygonsCorrectnessTest() {
     for (unsigned int i = 3; i <= NR_POLYGON_POINTS; i += 3) {
         // Inform the user which k-gon is tested next
         std::cout << "Running the correctness test for the regular " << i << "-gon..." << std::endl;
 
         // Run the correctness test
-        runRegularPolygonAffineTransformationCorrectnessTest(i);
+        runRegularPolygonCorrectnessTest(i);
     }
 }
 
 // Main function
 int main() {
     try {
-        runRegularPolygonsAffineTransformationCorrectnessTest();
+        runRegularPolygonsCorrectnessTest();
 
         return EXEC_SUCCESS_CODE;
     } catch (const MinimalAreaTriangleException &ex) {
