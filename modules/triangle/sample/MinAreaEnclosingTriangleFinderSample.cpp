@@ -29,8 +29,12 @@ std::vector<cv::Point2f> generateRandomSetOf2DPoints(int nrOfPoints) {
     std::vector<cv::Point2f> points;
 
     for (int i = 0; i < nrOfPoints; i++) {
-        points.push_back(cv::Point2f((rand() % POLYGON_POINT_X_MAX) + POLYGON_POINT_X_MAX,
-                                 (rand() % POLYGON_POINT_Y_MAX) + POLYGON_POINT_Y_MAX));
+        points.push_back(
+            cv::Point2f(
+                (rand() % POLYGON_POINT_X_MAX) + POLYGON_POINT_X_MAX,
+                (rand() % POLYGON_POINT_Y_MAX) + POLYGON_POINT_Y_MAX
+            )
+        );
     }
 
     return points;
@@ -104,13 +108,13 @@ bool arePointsEnclosed(const std::vector<cv::Point2f> &points, const std::vector
 
 // Check if all the triangle sides' middle points touch the convex hull of the given set of points
 bool isTriangleTouchingPolygon(const std::vector<cv::Point2f> &convexPolygon, const std::vector<cv::Point2f> &triangle) {
-    int nrOfPolygonPoints = convexPolygon.size();
+    std::size_t nrOfPolygonPoints = convexPolygon.size();
 
-    for (int i = 0; i < 3; i++) {
+    for (std::size_t i = 0; i < 3; i++) {
         bool isTouching = false;
         cv::Point2f middlePoint = Geometry2D::middlePoint(triangle[i], triangle[(i + 1) % 3]);
 
-        for (int j = 0; j < nrOfPolygonPoints; j++) {
+        for (std::size_t j = 0; j < nrOfPolygonPoints; j++) {
             if (Geometry2D::isPointOnLineSegment(middlePoint, convexPolygon[j],
                                                  convexPolygon[(j + 1) % nrOfPolygonPoints])) {
                 isTouching = true;
@@ -127,10 +131,10 @@ bool isTriangleTouchingPolygon(const std::vector<cv::Point2f> &convexPolygon, co
 
 // Check if at least one side of the triangle is flush with an edge of the polygon
 bool isOneEdgeFlush(const std::vector<cv::Point2f> &convexPolygon, const std::vector<cv::Point2f> &triangle) {
-    int nrOfPolygonPoints = convexPolygon.size();
+    std::size_t nrOfPolygonPoints = convexPolygon.size();
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < nrOfPolygonPoints; j++) {
+    for (std::size_t i = 0; i < 3; i++) {
+        for (std::size_t j = 0; j < nrOfPolygonPoints; j++) {
             if ((Geometry2D::isPointOnLineSegment(convexPolygon[j], triangle[i],
                                                   triangle[(i + 1) % 3])) &&
                 (Geometry2D::isPointOnLineSegment(convexPolygon[(j + 1) % nrOfPolygonPoints], triangle[i],
@@ -184,7 +188,7 @@ void runMinEnclosingTriangleFinder(const std::vector<cv::Point2f> &points) {
 
 // Run the minimum area enclosing triangle program using randomly generated sets of points
 void runMinEnclosingTriangleFinderUsingRandomPolygons() {
-    char key = 0;
+    int key = 0;
 
     // Initialise the seed - milliseconds is enough as this program is not to be run in parallel
     srand(time(0));
@@ -209,7 +213,7 @@ void runMinEnclosingTriangleFinder() {
 }
 
 // Main function
-int main(int argc, char** argv) {
+int main() {
     try {
         runMinEnclosingTriangleFinder();
     } catch (const std::exception &ex) {

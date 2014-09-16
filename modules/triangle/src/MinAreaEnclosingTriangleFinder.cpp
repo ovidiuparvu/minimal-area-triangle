@@ -36,9 +36,9 @@ double MinAreaEnclosingTriangleFinder::findMinTriangle(const std::vector<cv::Poi
     initialise(points, minEnclosingTriangle);
 
     if (polygon.size() > 3) {
-        return findMinEnclosingTriangle(polygon, minEnclosingTriangle);
+        return findMinEnclosingTriangle(minEnclosingTriangle);
     } else {
-        return returnMinEnclosingTriangle(polygon, minEnclosingTriangle);
+        return returnMinEnclosingTriangle(minEnclosingTriangle);
     }
 }
 
@@ -56,8 +56,7 @@ void MinAreaEnclosingTriangleFinder::initialiseConvexPolygon(const std::vector<c
     cv::convexHull(points, polygon, CONVEX_HULL_CLOCKWISE);
 }
 
-double MinAreaEnclosingTriangleFinder::findMinEnclosingTriangle(const std::vector<cv::Point2f> &polygon,
-                                                                std::vector<cv::Point2f> &minEnclosingTriangle) {
+double MinAreaEnclosingTriangleFinder::findMinEnclosingTriangle(std::vector<cv::Point2f> &minEnclosingTriangle) {
     double minEnclosingTriangleArea = std::numeric_limits<double>::max();
 
     initialiseAlgorithmVariables();
@@ -67,11 +66,10 @@ double MinAreaEnclosingTriangleFinder::findMinEnclosingTriangle(const std::vecto
     return minEnclosingTriangleArea;
 }
 
-double MinAreaEnclosingTriangleFinder::returnMinEnclosingTriangle(const std::vector<cv::Point2f> &polygon,
-                                                                  std::vector<cv::Point2f> &minEnclosingTriangle) {
-    int nrOfPolygonPoints = polygon.size();
+double MinAreaEnclosingTriangleFinder::returnMinEnclosingTriangle(std::vector<cv::Point2f> &minEnclosingTriangle) {
+    std::size_t nrOfPolygonPoints = polygon.size();
 
-    for (int i = 0; i < 3; i++) {
+    for (std::size_t i = 0; i < 3; i++) {
         minEnclosingTriangle.push_back(polygon[i % nrOfPolygonPoints]);
     }
 
@@ -120,27 +118,27 @@ bool MinAreaEnclosingTriangleFinder::areIntersectingLines(const std::vector<doub
 
 std::vector<double> MinAreaEnclosingTriangleFinder::lineEquationParameters(const cv::Point2f &p,
                                                                            const cv::Point2f &q) {
-    std::vector<double> lineEquationParameters;
+    std::vector<double> parametersLineEquation;
     double a, b, c;
 
     Geometry2D::lineEquationDeterminedByPoints(p, q, a, b, c);
 
-    lineEquationParameters.push_back(a);
-    lineEquationParameters.push_back(b);
-    lineEquationParameters.push_back(c);
+    parametersLineEquation.push_back(a);
+    parametersLineEquation.push_back(b);
+    parametersLineEquation.push_back(c);
 
-    return lineEquationParameters;
+    return parametersLineEquation;
 }
 
-void MinAreaEnclosingTriangleFinder::advance(unsigned int &index) {
+void MinAreaEnclosingTriangleFinder::advance(std::size_t &index) {
     index = successor(index);
 }
 
-unsigned int MinAreaEnclosingTriangleFinder::successor(unsigned int index) {
+std::size_t MinAreaEnclosingTriangleFinder::successor(std::size_t index) {
     return ((index + 1) % nrOfPoints);
 }
 
-unsigned int MinAreaEnclosingTriangleFinder::predecessor(unsigned int index) {
+std::size_t MinAreaEnclosingTriangleFinder::predecessor(std::size_t index) {
     return (index == 0) ? (nrOfPoints - 1)
                         : (index - 1);
 }

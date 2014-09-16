@@ -35,9 +35,9 @@ namespace triangle {
             cv::Point2f sideCStartVertex;       /*!< Starting vertex for side C of triangle */
             cv::Point2f sideCEndVertex;         /*!< Ending vertex for side C of triangle */
 
-            unsigned int a;                 /*!< Index of point "a"; see paper for more details */
-            unsigned int b;                 /*!< Index of point "b"; see paper for more details */
-            unsigned int c;                 /*!< Index of point "c"; see paper for more details */
+            std::size_t a;                      /*!< Index of point "a"; see paper for more details */
+            std::size_t b;                      /*!< Index of point "b"; see paper for more details */
+            std::size_t c;                      /*!< Index of point "c"; see paper for more details */
 
         public:
 

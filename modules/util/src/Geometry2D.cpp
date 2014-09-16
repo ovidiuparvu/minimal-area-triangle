@@ -58,7 +58,7 @@ bool Geometry2D::slopeOfLine(const cv::Point2f &a, const cv::Point2f &b, double 
     double nominator = b.y - a.y;
     double denominator = b.x - a.x;
 
-    if (denominator == 0) {
+    if (Numeric::almostEqual(denominator, 0)) {
         return false;
     } else {
         slope = nominator / denominator;
@@ -94,8 +94,8 @@ double Geometry2D::distanceFromPointToLine(const cv::Point2f &a, const cv::Point
 }
 
 cv::Point2f Geometry2D::middlePoint(const cv::Point2f &a, const cv::Point2f &b) {
-    double middleX = (a.x + b.x) / 2;
-    double middleY = (a.y + b.y) / 2;
+    float middleX = (a.x + b.x) / 2;
+    float middleY = (a.y + b.y) / 2;
 
     return cv::Point2f(middleX, middleY);
 }
@@ -162,8 +162,8 @@ bool Geometry2D::lineIntersection(const cv::Point2f &a1, const cv::Point2f &b1, 
     double det = (A1 * B2) - (A2 * B1);
 
     if (!Numeric::almostEqual(det, 0)) {
-        intersection.x = ((C1 * B2) - (C2 * B1)) / (det);
-        intersection.y = ((C2 * A1) - (C1 * A2)) / (det);
+        intersection.x = static_cast<float>(((C1 * B2) - (C2 * B1)) / (det));
+        intersection.y = static_cast<float>(((C2 * A1) - (C1 * A2)) / (det));
 
         return true;
     }
@@ -175,8 +175,8 @@ bool Geometry2D::lineIntersection(double a1, double b1, double c1, double a2, do
     double det = (a1 * b2) - (a2 * b1);
 
     if (!(Numeric::almostEqual(det, 0))) {
-        intersection.x = ((c1 * b2) - (c2 * b1)) / (det);
-        intersection.y = ((c2 * a1) - (c1 * a2)) / (det);
+        intersection.x = static_cast<float>(((c1 * b2) - (c2 * b1)) / (det));
+        intersection.y = static_cast<float>(((c2 * a1) - (c1 * a2)) / (det));
 
         return true;
     }

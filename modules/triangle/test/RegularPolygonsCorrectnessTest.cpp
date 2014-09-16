@@ -23,10 +23,10 @@ const std::string MSG_TESTS_EXECUTION_SUCCESSFUL = "[ SUCCESS ] All tests execut
 
 const double POLYGON_SIDE_LENGTH = 1000;
 
-const double POLYGON_ORIGIN_X = 2000;
-const double POLYGON_ORIGIN_Y = 2000;
+const float POLYGON_ORIGIN_X = 2000;
+const float POLYGON_ORIGIN_Y = 2000;
 
-const unsigned int NR_POLYGON_POINTS = 10002;
+const unsigned int MAX_NR_POLYGON_POINTS = 10002;
 
 
 // Compute the expected area for the equilateral triangle defined by the given number of points
@@ -57,8 +57,8 @@ std::vector<cv::Point2f> generateRegularPolygon(unsigned int nrOfPoints, double 
     for (unsigned int i = 0; i < nrOfPoints; i++) {
         regularPolygon.push_back(
             cv::Point2f(
-                POLYGON_ORIGIN_X + (radius * std::cos(i * arcAngle)),
-                POLYGON_ORIGIN_Y + (radius * std::sin(i * arcAngle))
+                static_cast<float>(POLYGON_ORIGIN_X + (radius * std::cos(i * arcAngle))),
+                static_cast<float>(POLYGON_ORIGIN_Y + (radius * std::sin(i * arcAngle)))
             )
         );
     }
@@ -100,7 +100,7 @@ void runRegularPolygonCorrectnessTest(unsigned int nrOfPoints) {
 
 // Run the regular polygons correctness test
 void runRegularPolygonsCorrectnessTest() {
-    for (unsigned int i = 3; i <= NR_POLYGON_POINTS; i += 3) {
+    for (unsigned int i = 3; i <= MAX_NR_POLYGON_POINTS; i += 3) {
         // Inform the user which k-gon is tested next
         std::cout << MSG_RUN_TEST_BEGIN << i << MSG_RUN_TEST_END << std::endl;
 

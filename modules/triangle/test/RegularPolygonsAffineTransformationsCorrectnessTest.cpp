@@ -23,15 +23,15 @@ const std::string MSG_TESTS_EXECUTION_SUCCESSFUL = "[ SUCCESS ] All tests execut
 
 const double POLYGON_SIDE_LENGTH = 1000;
 
-const double POLYGON_ORIGIN_X = 2000;
-const double POLYGON_ORIGIN_Y = 2000;
+const float POLYGON_ORIGIN_X = 2000;
+const float POLYGON_ORIGIN_Y = 2000;
 
 const float SCALING_FACTOR_X = 1.5;
 const float SCALING_FACTOR_Y = 1.5;
 
-const double ROTATION_ANGLE = (Geometry2D::PI / 4);
+const float ROTATION_ANGLE = (Geometry2D::PI / 4);
 
-const unsigned int NR_POLYGON_POINTS = 10002;
+const unsigned int MAX_NR_POLYGON_POINTS = 10002;
 
 
 // Compute the expected area for the equilateral triangle defined by the given number of points
@@ -63,7 +63,7 @@ void applyScalingAffineTransformation(cv::Point2f &polygonPoint) {
 
 // Apply the rotation affine transformation to the given point
 void applyRotationAffineTransformation(cv::Point2f &polygonPoint) {
-    // Translation
+    // Translation to origin
     polygonPoint.x = polygonPoint.x - POLYGON_ORIGIN_X;
     polygonPoint.y = polygonPoint.y - POLYGON_ORIGIN_Y;
 
@@ -98,8 +98,8 @@ std::vector<cv::Point2f> generateRegularPolygon(unsigned int nrOfPoints, double 
     for (unsigned int i = 0; i < nrOfPoints; i++) {
         regularPolygon.push_back(
             cv::Point2f(
-                POLYGON_ORIGIN_X + (radius * std::cos(i * arcAngle)),
-                POLYGON_ORIGIN_Y + (radius * std::sin(i * arcAngle))
+                POLYGON_ORIGIN_X + static_cast<float>(radius * std::cos(i * arcAngle)),
+                POLYGON_ORIGIN_Y + static_cast<float>(radius * std::sin(i * arcAngle))
             )
         );
     }
@@ -145,7 +145,7 @@ void runRegularPolygonAffineTransformationCorrectnessTest(unsigned int nrOfPoint
 
 // Run the regular polygons considering affine transformations correctness test
 void runRegularPolygonsAffineTransformationCorrectnessTest() {
-    for (unsigned int i = 3; i <= NR_POLYGON_POINTS; i += 3) {
+    for (unsigned int i = 3; i <= MAX_NR_POLYGON_POINTS; i += 3) {
         // Inform the user which k-gon is tested next
         std::cout << MSG_RUN_TEST_BEGIN << i << MSG_RUN_TEST_END << std::endl;
 

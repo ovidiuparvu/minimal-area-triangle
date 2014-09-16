@@ -205,7 +205,12 @@ namespace triangletest {
             int nrOfPoints = GetRandomNrOfPoints();
 
             for (int j = 0; j < nrOfPoints; j++) {
-                points.push_back(cv::Point2f(rand(), rand()));
+                points.push_back(
+                    cv::Point2f(
+                        static_cast<float>(rand()),
+                        static_cast<float>(rand())
+                    )
+                );
             }
 
             RunTest();
@@ -228,13 +233,23 @@ namespace triangletest {
     }
 
     int MinAreaEnclosingTriangleFinderTest::GetRandomNrOfExecutions() {
-        return (MIN_NR_EXECUTIONS + ((double)rand() / std::numeric_limits<double>::max()) *
-                                    (MAX_NR_EXECUTIONS - MIN_NR_EXECUTIONS));
+        return (
+            MIN_NR_EXECUTIONS +
+            static_cast<int>(
+                (static_cast<double>(rand()) / std::numeric_limits<double>::max()) *
+                static_cast<double>(MAX_NR_EXECUTIONS - MIN_NR_EXECUTIONS)
+            )
+        );
     }
 
     int MinAreaEnclosingTriangleFinderTest::GetRandomNrOfPoints() {
-        return (MIN_NR_POINTS + ((double)rand() / std::numeric_limits<double>::max()) *
-                                (MAX_NR_POINTS - MIN_NR_POINTS));
+        return (
+            MIN_NR_POINTS +
+            static_cast<int>(
+                (static_cast<double>(rand()) / std::numeric_limits<double>::max()) *
+                static_cast<double>(MAX_NR_POINTS - MIN_NR_POINTS)
+            )
+        );
     }
 
     bool MinAreaEnclosingTriangleFinderTest::ArePointsEnclosed() {
@@ -252,13 +267,13 @@ namespace triangletest {
     }
 
     bool MinAreaEnclosingTriangleFinderTest::IsTriangleTouchingPolygon() {
-        int nrOfPolygonPoints = convexHull.size();
+        std::size_t nrOfPolygonPoints = convexHull.size();
 
-        for (int i = 0; i < 3; i++) {
+        for (std::size_t i = 0; i < 3; i++) {
             bool isTouching = false;
             cv::Point2f middlePoint = Geometry2D::middlePoint(triangle[i], triangle[(i + 1) % 3]);
 
-            for (int j = 0; j < nrOfPolygonPoints; j++) {
+            for (std::size_t j = 0; j < nrOfPolygonPoints; j++) {
                 if (Geometry2D::isPointOnLineSegment(middlePoint, convexHull[j],
                                                      convexHull[(j + 1) % nrOfPolygonPoints])) {
                     isTouching = true;
@@ -274,10 +289,10 @@ namespace triangletest {
     }
 
     bool MinAreaEnclosingTriangleFinderTest::IsOneEdgeFlush() {
-        int nrOfPolygonPoints = convexHull.size();
+        std::size_t nrOfPolygonPoints = convexHull.size();
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < nrOfPolygonPoints; j++) {
+        for (std::size_t i = 0; i < 3; i++) {
+            for (std::size_t j = 0; j < nrOfPolygonPoints; j++) {
                 if ((Geometry2D::isPointOnLineSegment(convexHull[j], triangle[i],
                                                       triangle[(i + 1) % 3])) &&
                     (Geometry2D::isPointOnLineSegment(convexHull[(j + 1) % nrOfPolygonPoints], triangle[i],

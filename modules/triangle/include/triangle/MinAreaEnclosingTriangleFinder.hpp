@@ -19,7 +19,7 @@ namespace triangle {
 
             double area;                        /*!< Area of the current considered enclosing triangle */
 
-            unsigned int nrOfPoints;            /*!< Number of points defining the polygon */
+            std::size_t nrOfPoints;             /*!< Number of points defining the polygon */
 
             std::vector<cv::Point2f> polygon;   /*!< Polygon for which the minimum area enclosing triangle
                                                      is computed */
@@ -67,19 +67,15 @@ namespace triangle {
 
             //! Find the minimum area enclosing triangle for the given polygon
             /*!
-             * \param polygon                       Polygon of points for which the minimum area enclosing triangle will be  found
-             * \param minEnclosingTriangle          Minimum area triangle enclosing the given polygon
+             * \param minEnclosingTriangle  Minimum area triangle enclosing the given polygon
              */
-            double findMinEnclosingTriangle(const std::vector<cv::Point2f> &polygon,
-                                            std::vector<cv::Point2f> &minEnclosingTriangle);
+            double findMinEnclosingTriangle(std::vector<cv::Point2f> &minEnclosingTriangle);
 
             //! Return the minimum area enclosing triangle in case the given polygon has at most three points
             /*!
-             * \param polygon                       Polygon of points for which the minimum area enclosing triangle will be  found
-             * \param minEnclosingTriangle          Minimum area triangle enclosing the given polygon
+             * \param minEnclosingTriangle  Minimum area triangle enclosing the given polygon
              */
-            double returnMinEnclosingTriangle(const std::vector<cv::Point2f> &polygon,
-                                              std::vector<cv::Point2f> &minEnclosingTriangle);
+            double returnMinEnclosingTriangle(std::vector<cv::Point2f> &minEnclosingTriangle);
 
             //! Initialisation of the algorithm variables
             virtual void initialiseAlgorithmVariables() = 0;
@@ -151,7 +147,7 @@ namespace triangle {
             /*!
              * \param index Index of the point
              */
-            void advance(unsigned int &index);
+            void advance(std::size_t &index);
 
             //! Return the succesor of the provided point index
             /*!
@@ -160,7 +156,7 @@ namespace triangle {
              *
              * \param index Index of the point
              */
-            unsigned int successor(unsigned int index);
+            std::size_t successor(std::size_t index);
 
             //! Return the predecessor of the provided point index
             /*!
@@ -169,7 +165,7 @@ namespace triangle {
              *
              * \param index Index of the point
              */
-            unsigned int predecessor(unsigned int index);
+            std::size_t predecessor(std::size_t index);
 
         protected:
 
