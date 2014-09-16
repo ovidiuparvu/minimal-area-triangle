@@ -72,10 +72,10 @@ void applyRotationAffineTransformation(cv::Point2f &polygonPoint) {
     float oldPolygonPointYCoord = polygonPoint.y;
 
     // Rotation
-    polygonPoint.x = (oldPolygonPointXCoord * std::cos(ROTATION_ANGLE)) +
+    polygonPoint.x = (oldPolygonPointXCoord * std::cos(ROTATION_ANGLE)) -
                      (oldPolygonPointYCoord * std::sin(ROTATION_ANGLE));
-    polygonPoint.y = -(oldPolygonPointXCoord * std::sin(ROTATION_ANGLE)) +
-                      (oldPolygonPointYCoord * std::cos(ROTATION_ANGLE));
+    polygonPoint.y = (oldPolygonPointXCoord * std::sin(ROTATION_ANGLE)) +
+                     (oldPolygonPointYCoord * std::cos(ROTATION_ANGLE));
 
     // Translation back
     polygonPoint.x = polygonPoint.x + POLYGON_ORIGIN_X;
