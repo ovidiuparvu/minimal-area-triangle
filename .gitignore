@@ -1,5 +1,0 @@
-# Ignore the bin, build and lib folders
-/bin/*
-/build/Debug/*
-/build/Release/*
-/lib/*
