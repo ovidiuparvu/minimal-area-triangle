@@ -103,7 +103,7 @@ void LinearMinAreaEnclosingTriangleFinder::updateSidesBA() {
     // Find middle point of side B
     cv::Point2f sideBMiddlePoint;
 
-    if ((middlePointOfSideB(sideBMiddlePoint)) & (height(sideBMiddlePoint) < height(predecessor(a)))) {
+    if ((middlePointOfSideB(sideBMiddlePoint)) && (height(sideBMiddlePoint) < height(predecessor(a)))) {
         sideAStartVertex = polygon[predecessor(a)];
         sideAEndVertex = findVertexCOnSideB();
 
